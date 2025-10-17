@@ -73,7 +73,7 @@ How to Run
 
 ### 2\. Train the Model
 
-*   cd C:\\Users\\ADMIN\\Desktop\\BRIEF-3
+*   cd ./Path_to_Folder
     
 *   python prepare\_data.py
     
