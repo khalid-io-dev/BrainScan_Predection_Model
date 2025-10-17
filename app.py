@@ -10,13 +10,11 @@ import cv2
 
 import os
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
-
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 
 import logging
 logging.getLogger('absl').setLevel(logging.ERROR)
 logging.getLogger('tensorflow').setLevel(logging.ERROR)
-
 
 st.set_page_config(page_title="Brain Tumor Classifier", layout="centered")
 
@@ -30,11 +28,69 @@ MODEL_CANDIDATES = [
 LABELS_PATH = "models/label_classes.npy"
 DATA_SPLIT_TRAIN = Path("./Data_split/train")
 IMG_SIZE = (224, 224)
+# New: Path to saved figures (save plots from notebook as PNGs)
+FIGURES_DIR = Path("figures")
+PLOT1_PATH = FIGURES_DIR / "loss_acc_plot1.png"
+PLOT2_PATH = FIGURES_DIR / "loss_acc_plot2.png"
 
 st.title("Brain Tumor Classifier — Demo")
 st.markdown(
     "Upload an image or provide a local path. The app will load a Keras model from `models/` and a `label_classes.npy` file."
 )
+
+# ---- Integrated Documentation: Model Performance Section ----
+# This section integrates the training results as docs/explanations.
+# It uses expanders for collapsible info, with markdown for plots/report/examples.
+with st.expander("📊 Model Performance Overview (Training Results)"):
+    st.markdown("""
+    ### Training History Plots
+    These plots show loss and accuracy over 20 epochs from the training process (generated in `train_cnn.py` or `train_and_evaluate_cell.py`).
+    
+    - **Plot 1** (Mild fluctuations in validation):
+      - Loss: Train decreases smoothly from ~1.2 to ~0.1; Val from ~1.0 to ~0.3 with some ups/downs (mild overfitting).
+      - Accuracy: Train rises to ~1.0; Val to ~0.9 with oscillations (possible due to batch size or data noise).
+    """)
+    if PLOT1_PATH.exists():
+        st.image(str(PLOT1_PATH), caption="Training History Plot 1", use_column_width=True)
+    else:
+        st.info("Plot 1 image not found. Save as 'figures/loss_acc_plot1.png' from your notebook.")
+
+    st.markdown("""
+    - **Plot 2** (Smoother validation):
+      - Similar trends, but less fluctuation in val curves (perhaps from a refined run).
+    """)
+    if PLOT2_PATH.exists():
+        st.image(str(PLOT2_PATH), caption="Training History Plot 2", use_column_width=True)
+    else:
+        st.info("Plot 2 image not found. Save as 'figures/loss_acc_plot2.png' from your notebook.")
+
+    st.markdown("""
+    ### Classification Report (Test Set)
+    Evaluated on 1271 samples (from `train_and_evaluate_cell.py`). Overall accuracy: 96.85%. Strong performance, but meningioma has slightly lower recall.
+    
+                precision    recall  f1-score   support
+    glioma     0.9448    0.9448    0.9448       290
+    meningioma     0.9414    0.9223    0.9317       296
+    notumor     0.9925    1.0000    0.9962       395
+    pituitary     0.9863    0.9966    0.9914       290
+    accuracy                         0.9685      1271
+    macro avg     0.9663    0.9659    0.9661      1271
+    weighted avg     0.9683    0.9685    0.9684      1271 
+                
+
+
+    ### Example Correct Predictions
+    The model shows high confidence on clear cases (from `train_and_evaluate_cell.py` and `save_and_predict.py`):
+
+    Predicted: glioma  
+    Top probabilities:  
+      glioma: 0.9999  
+      meningioma: 0.0001  
+      notumor: 0.0000  
+      pituitary: 0.0000
+
+    This demonstrates the model's decisiveness. For visualization, 6 correct samples were shown in the notebook.
+    """)
 
 # ---- utility functions ----
 @st.cache_resource
