@@ -26,9 +26,9 @@ Ensure you have Python 3.8 or higher installed on your system. You can download 
 
 Install the required Python packages using pip. Run the following command in your terminal or command prompt:
 
-bash
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   pip install -r requirements.txt   `
+bash ```
+   pip install -r requirements.txt   `
+```
 
 If you don't have a requirements.txt file yet, create one with the following content and run the command above:
 
