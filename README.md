@@ -28,9 +28,8 @@ Install the required Python packages using pip. Run the following command in you
 
 If you don't have a requirements.txt file yet, create one with the following content and run the command above:
 
-text
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   streamlit==1.30.0  tensorflow==2.15.0  opencv-python==4.9.0.80  numpy==1.26.2  Pillow==10.2.0  scikit-learn==1.3.2  matplotlib==3.8.2  seaborn==0.13.2  pandas==2.2.0   `
+** streamlit==1.30.0  tensorflow==2.15.0  opencv-python==4.9.0.80  numpy==1.26.2  Pillow==10.2.0  scikit-learn==1.3.2  matplotlib==3.8.2  seaborn==0.13.2  pandas==2.2.0   `**
 
 #### Notes on Dependencies
 
